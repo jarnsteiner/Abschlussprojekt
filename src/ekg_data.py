@@ -20,10 +20,10 @@ class EKGdata:
         #self.df = self.df.iloc[:5000]  # Entferne die erste Zeile, da sie nur die Spaltennamen enthält
         self.peaks = 0
 
-    def plot_time_series(self):
+   # def plot_time_series(self):
 
         # Erstellte einen Line Plot, der ersten 2000 Werte mit der Zeit aus der x-Achse
-        self.fig = px.line(self.df.head(2000), x="Zeit in ms", y="Messwerte in mV")
+       # self.fig = px.line(self.df.head(2000), x="Zeit in ms", y="Messwerte in mV")
         #return self.fig 
 
     def find_peaks(self, threshold = 0, respacing_factor = 5):
@@ -45,7 +45,7 @@ class EKGdata:
             next = row
 
             if last < current and current > next and current > threshold:
-                peaks.append(index-respacing_factor)
+                peaks.append(index)
         
         self.peaks = peaks
         return peaks
@@ -58,7 +58,7 @@ class EKGdata:
         if df_plot is None:
             df_plot = self.df
         
-        df_plot = self.df.head(5000)
+        #df_plot = self.df.head(5000)
 
         fig, ax = plt.subplots(figsize=(12, 5))
 
