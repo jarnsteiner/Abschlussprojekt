@@ -7,7 +7,7 @@ def show():
     st.set_page_config(
         page_title="EKG Analyse Sheesh :)",
         page_icon="❤️",
-        layout="centered"
+        layout="wide"
     )
 
     st.title("EKG Analyse")

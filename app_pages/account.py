@@ -4,10 +4,7 @@ from src.ekg_data import EKGdata
 from src.read_data import load_person_data, get_name_to_id
 
 def show():
-
-
-
-    st.title("EKG Analyse")
+    st.title("Benutzer")
 
     st.divider()
 
