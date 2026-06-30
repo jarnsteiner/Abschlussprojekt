@@ -20,7 +20,7 @@ st.markdown("""
 
 /* Abstand zwischen den Einträgen */
 [data-testid="stSidebar"] div[role="radiogroup"] > label {
-    padding-top: 30px;
+    padding-top: 10px;
     padding-bottom: 30px;
 }
 
@@ -28,7 +28,11 @@ st.markdown("""
 [data-testid="stSidebar"] input[type="radio"] {
     transform: scale(3);
 }
-
+            
+[data-testid="stSidebar"] img {
+    margin-top: -50px;
+    margin-bottom: -50px;
+}
 </style>
 """, unsafe_allow_html=True)
 
@@ -38,7 +42,7 @@ st.set_page_config(
     page_icon= "🌙"
     )
 
-st.sidebar.title("🌙😴📊📈")
+st.sidebar.image("data/pictures/icon.png")
 st.sidebar.title("Schlafanalyse")
 
 page = st.sidebar.radio(
@@ -65,3 +69,6 @@ elif page == "❤️ EKG-Datenanalyse":
 elif page == "👤 Benutzer":
     account.show()
 
+st.sidebar.subheader("Platzhalter Name des aktuellen Profils")
+
+st.sidebar.subheader("Platzhalter Bild des aktuellen Profils")
