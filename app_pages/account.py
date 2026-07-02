@@ -4,6 +4,14 @@ from src.ekg_data import EKGdata
 from src.read_data import load_person_data, get_name_to_id
 
 def show():
+    st.set_page_config(
+        page_title="Benutzer",
+        page_icon="👤",
+        layout="wide"
+    )
+
+
+    
     st.title("Benutzer")
 
     st.divider()

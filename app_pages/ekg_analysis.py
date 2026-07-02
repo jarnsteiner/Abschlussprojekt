@@ -5,7 +5,7 @@ from src.read_data import load_person_data, get_name_to_id
 
 def show():
     st.set_page_config(
-        page_title="EKG Analyse Sheesh :)",
+        page_title="EKG Analyse",
         page_icon="❤️",
         layout="wide"
     )

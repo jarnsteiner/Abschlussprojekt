@@ -6,7 +6,11 @@ from src.read_data import load_person_data, get_name_to_id
 
 def show():
 
-
+    st.set_page_config(
+    layout="wide",
+    page_title="Übersicht",
+    page_icon= "🏠"
+    )
 
     st.title("EKG Analyse")
 

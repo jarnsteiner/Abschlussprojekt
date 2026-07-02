@@ -36,11 +36,7 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
-st.set_page_config(
-    layout="wide",
-    page_title="Schlafanalyse",
-    page_icon= "🌙"
-    )
+
 
 st.sidebar.image("data/pictures/icon.png")
 st.sidebar.title("Schlafanalyse")
