@@ -1,5 +1,5 @@
 import streamlit as st
-
+from src import person
 from app_pages import registration
 
 def show():

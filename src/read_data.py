@@ -46,7 +46,7 @@ def find_person_data_by_name(suchstring):
     else:
         return {}
     
-def add_person(firstname, lastname, birth_year, gender, picture_path):
+def add_person(firstname, lastname, birth_year, gender, picture_path = "data/pictures/Muster.jpg"):
     """
     Fügt eine neue Person zur person_db.json hinzu.
     """
@@ -104,6 +104,7 @@ def add_ekg_test(person_id, test_date, result_link):
 def delete_person(person_id):
     """
     Löscht eine Person anhand ihrer ID aus der Datenbank.
+    
     """
 
     person_data = load_person_data()
@@ -119,6 +120,7 @@ def delete_person(person_id):
 def update_person(person_id, firstname, lastname, birth_year, gender, picture_path):
     """
     Aktualisiert die Daten einer bestehenden Person.
+
     """
 
     person_data = load_person_data()
