@@ -6,10 +6,10 @@ class Person:
 
     """Speichert alle Informationen und EKG-Tests einer Person."""
 
-    def __init__(self, id, username, password, date_of_birth, firstname, lastname, picture_path, ekg_tests, smartwatch_data, gender="male"):
+    def __init__(self, id, username, hash_pwd, date_of_birth, firstname, lastname, picture_path, ekg_tests, smartwatch_data, gender="male"):
         self.id = id
         self.username = username
-        self.hash_pwd = password
+        self.hash_pwd = hash_pwd
         self.date_of_birth = date_of_birth
         self.firstname = firstname
         self.lastname = lastname
@@ -30,7 +30,7 @@ class Person:
                 return Person(
                     p["id"],
                     p["username"],
-                    p["password"],
+                    p["hash_pwd"],
                     p["date_of_birth"],
                     p["firstname"],
                     p["lastname"],
@@ -43,7 +43,7 @@ class Person:
         return None
 
     @staticmethod
-    
+
     def load_by_username(username):
 
         with open("data/person_db.json", "r", encoding="utf-8") as file:
@@ -54,7 +54,7 @@ class Person:
                 return Person(
                     p["id"],
                     p["username"],
-                    p["password"],
+                    p["hash_pwd"],
                     p["date_of_birth"],
                     p["firstname"],
                     p["lastname"],

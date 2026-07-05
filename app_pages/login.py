@@ -1,5 +1,6 @@
 import streamlit as st
-from src import person
+from src.person import Person
+from src.crypt import check_password
 from app_pages import registration
 
 def show():
@@ -20,13 +21,17 @@ def show():
     cols = st.columns(2)
     with cols[0]:
         if st.button("Einloggen", use_container_width=True):
-
-            if username == "admin" and password == "1234":
+            
+            user = Person.load_by_username(username)
+            if user == None:
+                st.error("Benutzername nicht gefunden")
+            # if username == "admin" and password == "1234":
+            elif check_password(password, user.hash_pwd) == True:
                 st.session_state.logged_in = True
                 st.session_state.username = username
                 st.rerun()
             else:
-                st.error("Benutzername oder Passwort falsch")
+                st.error("Passwort falsch")
     with cols[1]:
         if st.button("Registrieren", use_container_width=True):
             st.session_state.page = "register"

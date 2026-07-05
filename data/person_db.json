@@ -2,7 +2,7 @@
   {
     "id": 1,
     "username": "julian",
-    "hash_pwd": "$2b$12$C6UzMDM.H6dfI/f/IKcEe.6Q4Q8mM9Qz8uQ8Qh3L8Q7h3rN2v9r6K",
+    "hash_pwd": "$2b$12$udnwWw2JjP4iei76aYySi.h298i7n80Stnf61/vaNnq/3LRN/OWFW",
     "date_of_birth": 1989,
     "firstname": "Julian",
     "lastname": "Huber",
@@ -36,7 +36,7 @@
   {
     "id": 2,
     "username": "yannic",
-    "hash_pwd": "$2b$12$C6UzMDM.H6dfI/f/IKcEe.6Q4Q8mM9Qz8uQ8Qh3L8Q7h3rN2v9r6K",
+    "hash_pwd": "$2b$12$udnwWw2JjP4iei76aYySi.h298i7n80Stnf61/vaNnq/3LRN/OWFW",
     "date_of_birth": 1967,
     "firstname": "Yannic",
     "lastname": "Heyer",
@@ -54,7 +54,7 @@
   {
     "id": 3,
     "username": "yunus",
-    "hash_pwd": "$2b$12$C6UzMDM.H6dfI/f/IKcEe.6Q4Q8mM9Qz8uQ8Qh3L8Q7h3rN2v9r6K",
+    "hash_pwd": "$2b$12$udnwWw2JjP4iei76aYySi.h298i7n80Stnf61/vaNnq/3LRN/OWFW",
     "date_of_birth": 1973,
     "firstname": "Yunus",
     "lastname": "Schmirander",
@@ -72,7 +72,7 @@
   {
     "id": 4,
     "username": "max",
-    "hash_pwd": "$2b$12$C6UzMDM.H6dfI/f/IKcEe.6Q4Q8mM9Qz8uQ8Qh3L8Q7h3rN2v9r6K",
+    "hash_pwd": "$2b$12$udnwWw2JjP4iei76aYySi.h298i7n80Stnf61/vaNnq/3LRN/OWFW",
     "firstname": "Max",
     "lastname": "Mustermann",
     "date_of_birth": 2000,
