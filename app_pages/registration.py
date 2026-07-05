@@ -1,9 +1,10 @@
 import streamlit as st
 from src.crypt import hash_password
 from src.read_data import add_person
+from src.person import Person
 
 def show():
-
+    error = None
     st.set_page_config(
         page_title="Registrierung",
         page_icon="👤",
@@ -39,7 +40,8 @@ def show():
 
         with col1[0]:
             if st.button("Registrieren", use_container_width=True): 
-                if check_person(firstname, lastname, username, date_of_birth, password1, password2) == True:
+                error = check_person(firstname, lastname, username, password1, password2)
+                if  error == None:
                     hash_pwd = hash_password(password1)
                     add_person(username, hash_pwd, date_of_birth, firstname, lastname, gender)
                     st.session_state.logged_in = True
@@ -50,19 +52,21 @@ def show():
             if st.button("zum Login zurück", use_container_width=True):
                 st.session_state.page = "login"
                 st.rerun()
+        if error != None:
+            st.error(error)
 
-def check_person(firstname, lastname, username, date_ofbirth,  password1, password2):
+
+
+def check_person(firstname, lastname, username, password1, password2):
     if firstname.strip() == "":
-        st.error("Bitte Vornamen eingeben")
-        return False
+        return "Bitte Vornamen eingeben"
     if lastname.strip() == "":
-        st.error("Bitte Nachnamen eingeben")
-        return False
+        return "Bitte Nachnamen eingeben"
     if username.strip() == "":
-        st.error("Bitte Benutzername eingeben")
-        return False
+        return "Bitte Benutzername eingeben"
+    if Person.load_by_username(username) != None:
+        return "Benutzername bereits verfügbar"
     if password1 != password2:
-        st.error("Passwort stimmt nicht überein")
-        return False
-    return True
+        return "Passwort stimmt nicht überein"
+    return None
     
