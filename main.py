@@ -7,6 +7,14 @@ from app_pages import overview, sleep_analysis, account, ekg_analysis, login
 st.markdown("""
 <style>
 
+/* Gesamte rechte Seite */
+.stApp {
+    background-color: #0E1624;
+}
+/* Oberer Header */
+[data-testid="stHeader"] {
+    background-color: #0E1624;
+}
 /* Sidebar */
 [data-testid="stSidebar"] {
     background: linear-gradient(180deg, #07111f 0%, #0b1020 100%);
