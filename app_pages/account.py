@@ -17,20 +17,8 @@ def show():
 
     st.divider()
 
-    person_data = load_person_data()
-    name_to_id = get_name_to_id(person_data)
-
-
-
-    selected_name = st.selectbox("Person auswählen", list(name_to_id.keys()))
-
-    selected_id = name_to_id[selected_name]
-
-    st.divider()
-
+    selected_id = st.session_state.user_id
     person = Person.load_by_id(selected_id)
-
-
 
     left_col, right_col = st.columns([1, 2])
 
@@ -106,49 +94,6 @@ def show():
             delete_person(selected_id)
             st.success("Person wurde gelöscht.")
             st.rerun()
-
-    st.divider()
-
-    st.subheader("Neue Person hinzufügen")
-
-    with st.form("add_person_form"):
-
-        firstname = st.text_input("Vorname")
-        lastname = st.text_input("Nachname")
-
-        birth_year = st.number_input(
-            "Geburtsjahr",
-            min_value=1900,
-            max_value=2100,
-            value=2000
-        )
-
-        gender = st.selectbox(
-            "Geschlecht",
-            ["male", "female"]
-        )
-
-        picture_path = st.text_input(
-            "Pfad zum Bild"
-        )
-
-        submitted = st.form_submit_button("Person hinzufügen")
-
-        if submitted:
-
-            if not os.path.exists(picture_path):
-                st.error("Bild wurde nicht gefunden.")
-            
-            else:
-                new_id = add_person(
-                    firstname,
-                    lastname,
-                    birth_year,
-                    gender,
-                    picture_path
-                )
-
-            st.success(f"Person mit ID {new_id} hinzugefügt.")
 
     st.divider()
 

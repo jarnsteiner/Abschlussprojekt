@@ -39,9 +39,10 @@ def show():
                 if user == None:
                     st.error("Benutzername nicht gefunden")
                 # if username == "admin" and password == "1234":
-                elif check_password(password, user.hash_pwd) == True:
+                elif check_password(password, user.hash_pwd):
                     st.session_state.logged_in = True
                     st.session_state.username = username
+                    st.session_state.user_id = user.id
                     st.rerun()
                 else:
                     st.error("Passwort falsch")
