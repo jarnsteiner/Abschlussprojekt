@@ -43,10 +43,10 @@ def show():
 
     with cols[0]:
 
-        st.plotly_chart(fig, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig, width="stretch", config={"displayModeBar": False})
 
     with cols[1]:  
-        st.plotly_chart(fig2, use_container_width=True, config={"displayModeBar": False})
+        st.plotly_chart(fig2, width="stretch", config={"displayModeBar": False})
 
     
     

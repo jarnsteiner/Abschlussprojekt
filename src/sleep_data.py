@@ -111,7 +111,7 @@ class sleep_data:
 
         fig.update_layout(
         title=dict(
-            text="💧 SpO₂ <span style='font-size:14px; color:#A8B3C7'>(bpm)</span>",
+            text="💧 SpO₂ <span style='font-size:14px; color:#A8B3C7'>(%)</span>",
             x=0.02,
             y=0.95,
             xanchor="left",

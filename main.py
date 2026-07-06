@@ -98,7 +98,7 @@ if not st.session_state.logged_in:
     st.stop()
 
 
-st.sidebar.image("data/pictures/icon.png", use_container_width= True)
+st.sidebar.image("data/pictures/icon.png", width= "stretch")
 st.sidebar.title("Schlafanalyse")
 
 page = st.sidebar.radio(
@@ -132,6 +132,6 @@ elif page == "👤 Benutzer":
 
 #st.sidebar.markdown("<div class='logout-space'></div>", unsafe_allow_html=True)
 
-if st.sidebar.button("Logout",use_container_width= True):
+if st.sidebar.button("Logout", width="stretch"):
     st.session_state.logged_in = False
     st.rerun()

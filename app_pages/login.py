@@ -33,7 +33,7 @@ def show():
 
         cols1 = st.columns(2)
         with cols1[0]:
-            if st.button("Einloggen", use_container_width=True):
+            if st.button("Einloggen", width="stretch"):
                 
                 user = Person.load_by_username(username)
                 if user == None:
@@ -46,7 +46,7 @@ def show():
                 else:
                     error = ("Passwort falsch")
         with cols1[1]:
-            if st.button("Registrieren", use_container_width=True):
+            if st.button("Registrieren", width="stretch"):
                 st.session_state.page = "register"
                 st.rerun()
         
