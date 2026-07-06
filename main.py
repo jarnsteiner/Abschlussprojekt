@@ -2,7 +2,7 @@ import streamlit as st
 from src.person import Person
 from src.ekg_data import EKGdata
 from src.read_data import load_person_data, get_name_to_id
-from app_pages import overview, sleep_analysis, account, ekg_analysis, login
+from app_pages import sleep_analysis, account, ekg_analysis, login
 
 st.markdown("""
 <style>
