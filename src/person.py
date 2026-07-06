@@ -19,7 +19,7 @@ class Person:
         self.gender = gender
 
 
-
+    @staticmethod
     def load_by_id(person_id):
 
         with open("data/person_db.json", "r", encoding="utf-8") as file:
@@ -43,7 +43,6 @@ class Person:
         return None
 
     @staticmethod
-
     def load_by_username(username):
 
         with open("data/person_db.json", "r", encoding="utf-8") as file:

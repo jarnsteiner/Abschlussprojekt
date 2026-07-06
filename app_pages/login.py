@@ -27,7 +27,7 @@ def show():
     with cols[1]:
         st.markdown("<div style='height: 200px;'></div>", unsafe_allow_html=True)
         st.title("Login")
-        
+        error = None
         username = st.text_input("Benutzername", key="login_username")
         password = st.text_input("Passwort", type="password", key="login_password")
 
@@ -37,15 +37,18 @@ def show():
                 
                 user = Person.load_by_username(username)
                 if user == None:
-                    st.error("Benutzername nicht gefunden")
+                    error = ("Benutzername nicht gefunden")
                 # if username == "admin" and password == "1234":
                 elif check_password(password, user.hash_pwd) == True:
                     st.session_state.logged_in = True
-                    st.session_state.username = username
+                    st.session_state.user = user
                     st.rerun()
                 else:
-                    st.error("Passwort falsch")
+                    error = ("Passwort falsch")
         with cols1[1]:
             if st.button("Registrieren", use_container_width=True):
                 st.session_state.page = "register"
                 st.rerun()
+        
+        if error != None:
+            st.error(error)
