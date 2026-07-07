@@ -18,6 +18,11 @@
                 "id": 2,
                 "date": "03.07.2026",
                 "result_link": "data/smartwatch_data\\20260707_174632_sleep_002_all_phases_apnea.csv"
+            },
+            {
+                "id": 3,
+                "date": "07.07.2026",
+                "result_link": "data/smartwatch_data\\20260707_184300_sleep_002.csv"
             }
         ],
         "intervall_tests": {
