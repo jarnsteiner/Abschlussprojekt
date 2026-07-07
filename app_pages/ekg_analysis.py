@@ -13,18 +13,11 @@ def show():
     st.title("EKG Analyse")
     st.divider()
 
-    # -------------------------
-    # PERSONENAUSWAHL
-    # -------------------------
-    person_data = load_person_data()
-    name_to_id = get_name_to_id(person_data)
-
-    selected_name = st.selectbox("Person auswählen", list(name_to_id.keys()))
-    selected_id = name_to_id[selected_name]
-
+   
+    selected_id = st.session_state.user_id
     person = Person.load_by_id(selected_id)
 
-    st.divider()
+    person = Person.load_by_id(selected_id)
 
     # -------------------------
     # TESTAUSWAHL
