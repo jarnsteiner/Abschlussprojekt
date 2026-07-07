@@ -37,6 +37,24 @@ class sleep_data:
             center=True
         ).median()
 
+        self.data["hrv_filtered"] = self.data["hrv"].rolling(
+        window=5,
+        center=True,
+        min_periods=1
+        ).mean()
+
+        self.data["movement_filtered"] = self.data["movement"].rolling(
+            window=5,
+            center=True,
+            min_periods=1
+        ).mean()
+
+        self.data["respiration_filtered"] = self.data["respiration_rate"].rolling(
+            window=5,
+            center=True,
+            min_periods=1
+        ).mean()
+
         return self.data
     
     
@@ -151,3 +169,68 @@ class sleep_data:
         fig.update_yaxes(range=[80, 100], dtick=5)
 
         return fig
+    
+
+    def calculate_sleep_phases(self):
+        if self.data["heart_rate_filtered"] is None:
+            self.filter_data()
+
+        df = self.data.copy()
+
+        # Grenzwerte dynamisch aus den eigenen Daten berechnen
+        hr_low = df["heart_rate_filtered"].quantile(0.30)
+        hr_high = df["heart_rate_filtered"].quantile(0.70)
+
+        hrv_low = df["hrv_filtered"].quantile(0.30)
+        hrv_high = df["hrv_filtered"].quantile(0.70)
+
+        movement_low = df["movement_filtered"].quantile(0.30)
+        movement_high = df["movement_filtered"].quantile(0.70)
+
+        respiration_low = df["respiration_filtered"].quantile(0.30)
+        respiration_high = df["respiration_filtered"].quantile(0.70)
+
+        def classify_phase(row):
+            hr = row["heart_rate_filtered"]
+            hrv = row["hrv_filtered"]
+            movement = row["movement_filtered"]
+            respiration = row["respiration_filtered"]
+            spo2 = row["spo2"]
+
+            # Wach
+            if movement >= movement_high and hr >= hr_high:
+                return "Wach"
+
+            # Tiefschlaf
+            if hr <= hr_low and movement <= movement_low and respiration <= respiration_low:
+                return "Tiefschlaf"
+
+            # REM-Schlaf
+            if hr >= hr_high and hrv >= hrv_high and movement <= movement_low:
+                return "REM-Phase"
+
+            # Leichter Schlaf
+            return "leichter Schlaf"
+
+        df["sleep_phase"] = df.apply(classify_phase, axis=1)
+
+        self.data = df
+
+        return df
+    
+if __name__ == "__main__":
+
+    sleep = sleep_data("data/smartwatch_data/sleep_001.csv")
+
+    sleep.load_data()
+    sleep.filter_data()
+    sleep.calculate_sleep_phases()
+
+    print(sleep.data[[
+        "timestamp",
+        "heart_rate",
+        "hrv",
+        "spo2",
+        "movement",
+        "sleep_phase"
+    ]].head(60))
