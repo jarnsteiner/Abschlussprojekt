@@ -11,8 +11,51 @@ def metric_card(title, value, icon=""):
         <div class="metric-value">{value}</div>
     </div>
     """, unsafe_allow_html=True)
+def sleepscore_card(score):
+    
 
+    if score >= 85:
+        title = "Ausgezeichnet geschlafen 🌟"
+        text = "Dein Schlaf war sehr erholsam."
 
+    elif score >= 70:
+        title = "Gut geschlafen 👍"
+        text = "Du hast insgesamt gut geschlafen."
+
+    elif score >= 50:
+        title = "Weniger gut geschlafen 😐"
+        text = "Dein Schlaf war teilweise unruhig oder zu kurz."
+
+    else:
+        title = "Schlecht geschlafen 😴"
+        text = "Dein Schlaf war deutlich beeinträchtigt."
+    
+    
+    st.markdown(f"""
+        <div class="metric-card" style="height: 300px; text-align:center;">
+            <div class="metric-title">Schlafqualität</div>
+            <div style="
+                margin: 30px auto 10px auto;
+                width: 150px;
+                height: 150px;
+                border-radius: 50%;
+                border: 14px solid #6ee75f;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 42px;
+                font-weight: 800;
+                color: white;">
+                {score}
+            </div>
+            <div style="color:white; font-weight:700;">{title}</div>
+            <div style="color:#A8B3C7; font-size:13px; margin-top:10px;">
+                {text}
+            </div>
+        </div>
+        """, unsafe_allow_html=True)
+    
+    
 
 def show():
     st.set_page_config(
@@ -55,13 +98,12 @@ def show():
             with subheader[0]:
                 selected_date = st.selectbox(
                     "Datum der Schlafanalyse",
-                    options=options_date
+                    options=options_date,
+                    key="selected_sleep_date"
                 )
             with subheader[1]:
-                uploaded_file = st.file_uploader(
-                    "Smartwatch-Datei hochladen",
-                    type=["csv", "json"]
-                )
+                if st.button("📤 Schlafdaten hochladen"):
+                    upload_sleep_dialog(person)
         else:
             selected_date = None
 
@@ -149,47 +191,22 @@ def show():
     mid = st.columns([2, 1])
 
     with mid[0]:
-        sleep.calculate_sleep_phases()
-
         fig_phases = sleep.plot_sleep_phases()
 
         st.plotly_chart(
             fig_phases,
-            use_container_width=True,
+            width='stretch',
             config={"displayModeBar": False}
         )
 
     with mid[1]:
-        st.markdown(f"""
-        <div class="metric-card" style="height: 300px; text-align:center;">
-            <div class="metric-title">Schlafqualität</div>
-            <div style="
-                margin: 30px auto 10px auto;
-                width: 150px;
-                height: 150px;
-                border-radius: 50%;
-                border: 14px solid #6ee75f;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 42px;
-                font-weight: 800;
-                color: white;">
-                {result["sleep_score"]}
-            </div>
-            <div style="color:white; font-weight:700;">Gute Erholung! 👍</div>
-            <div style="color:#A8B3C7; font-size:13px; margin-top:10px;">
-                Du hast gut geschlafen.
-            </div>
-        </div>
-        """, unsafe_allow_html=True)
+        sleepscore_card(result["sleep_score"])
 
     st.divider()
     # Untere Plots
     bottom = st.columns(2)
 
     with bottom[0]:
-        sleep.calculate_sleep_phases()
         fig_hr = sleep.plot_heart_rate()
         st.plotly_chart(
             fig_hr,
@@ -206,6 +223,37 @@ def show():
         )
 
     if result["apnea_warning"]:
-        st.warning(result["apnea_text"])
+        st.toast(
+        "⚠️ Mögliche Schlafapnoe erkannt. Lassen Sie sich Ärztlich überprüfen",
+        icon="⚠️"
+    )
+
+
+import streamlit as st
+from src.read_data import save_uploaded_smartwatch_file
+
+@st.dialog("Neue Schlafdaten hochladen")
+def upload_sleep_dialog(person):
+
+    uploaded_file = st.file_uploader(
+        "CSV-Datei auswählen",
+        type=["csv"]
+    )
+
+    date = st.date_input("Datum der Schlafanalyse")
+
+    if uploaded_file is not None:
+
+        if st.button("Speichern"):
+
+            file_path = save_uploaded_smartwatch_file(uploaded_file)
+
+            person.add_smartwatch_data(
+                date=date.strftime("%d.%m.%Y"),
+                file_path=file_path
+            )
+
+            st.success("Datei erfolgreich hinzugefügt.")
+            st.rerun()
 
     
