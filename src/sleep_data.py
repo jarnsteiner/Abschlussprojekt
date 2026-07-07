@@ -63,7 +63,7 @@ class sleep_data:
 
         fig.add_trace(
             go.Scatter(
-                x=self.data.index,
+                x=self.data["timestamp"],
                 y=self.data["heart_rate_filtered"],   # ggf. Spaltenname anpassen
                 mode="lines",
                 name="Herzfrequenz",
@@ -90,7 +90,9 @@ class sleep_data:
         margin=dict(l=40, r=25, t=45, b=35),
 
         xaxis=dict(
-            title=None,
+            title="Uhrzeit",
+            tickformat="%H:%M",
+            dtick=3600000,          # jede Stunde ein Tick
             showgrid=False,
             zeroline=False,
             showline=False,
@@ -119,7 +121,7 @@ class sleep_data:
 
         fig.add_trace(
             go.Scatter(
-                x=self.data.index,
+                x=self.data["timestamp"],
                 y=self.data["spo2_filtered"],   # ggf. Spaltenname anpassen
                 mode="lines",
                 name="Sauerstoffsättigung",
@@ -146,7 +148,9 @@ class sleep_data:
         margin=dict(l=40, r=25, t=45, b=35),
 
         xaxis=dict(
-            title=None,
+            title="Uhrzeit",
+            tickformat="%H:%M",
+            dtick=3600000,          # jede Stunde ein Tick
             showgrid=False,
             zeroline=False,
             showline=False,
@@ -226,7 +230,7 @@ class sleep_data:
         start_time = df["timestamp"].min()
         end_time = df["timestamp"].max()
 
-        sleep_duration_hours = (end_time - start_time).total_seconds() / 3600
+        sleep_duration_hours = (((end_time - start_time).total_seconds() / 60)- len(df[df["sleep_phase"] == "Wach"]))/60
 
         avg_spo2 = df["spo2"].mean()
         min_spo2 = df["spo2"].min()
