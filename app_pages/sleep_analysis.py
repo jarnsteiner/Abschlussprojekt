@@ -11,6 +11,7 @@ def metric_card(title, value, icon=""):
         <div class="metric-value">{value}</div>
     </div>
     """, unsafe_allow_html=True)
+    
 def sleepscore_card(score):
     
 
