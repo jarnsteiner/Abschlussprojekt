@@ -21,3 +21,4 @@ if __name__ == "__main__":
     h = bcrypt.hashpw(p.encode("utf-8"), bcrypt.gensalt())
     print(h.decode("utf-8"))
     print(check_password(p , h.decode("utf-8")))
+    print(check_password(p , h.decode("utf-8")))
