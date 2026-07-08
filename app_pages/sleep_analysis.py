@@ -1,10 +1,11 @@
 import streamlit as st
-import pandas as pd
 from src.sleep_data import sleep_data
 from src.read_data import save_uploaded_smartwatch_file
-from src.person import Person
 
 def metric_card(title, value, icon=""):
+
+    """Zeigt eine formatierte Kennzahlenkarte mit Titel, Wert und optionalem Symbol an."""
+
     st.markdown(f"""
     <div class="metric-card">
         <div class="metric-title">{icon} {title}</div>

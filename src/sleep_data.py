@@ -1,12 +1,15 @@
-import json
-from matplotlib import pyplot as plt
 import pandas as pd
-import streamlit as st
 import plotly.graph_objects as go
 
 
 class sleep_data:
+
+    """Verwaltet Smartwatch-Schlafdaten und stellt Funktionen zur Analyse und Visualisierung bereit."""
+
     def __init__(self, result_link):
+
+        """Initialisiert das Objekt mit dem Pfad zur Smartwatch-Datei."""
+
         self.result_link = result_link
         self.data = None
         
@@ -16,6 +19,12 @@ class sleep_data:
         return self.data
     
     def filter_data(self):
+
+        """
+        Glättet die Messwerte mithilfe gleitender Mittelwerte bzw. Mediane,
+        um Ausreißer zu reduzieren und die Daten für die Analyse vorzubereiten.
+        """
+
         if self.data is None:
             self.load_data
         
@@ -64,7 +73,7 @@ class sleep_data:
         fig.add_trace(
             go.Scatter(
                 x=self.data.index,
-                y=self.data["heart_rate_filtered"],   # ggf. Spaltenname anpassen
+                y=self.data["heart_rate_filtered"],   
                 mode="lines",
                 name="Herzfrequenz",
                 line=dict(color="red", width=2)
@@ -120,7 +129,7 @@ class sleep_data:
         fig.add_trace(
             go.Scatter(
                 x=self.data.index,
-                y=self.data["spo2_filtered"],   # ggf. Spaltenname anpassen
+                y=self.data["spo2_filtered"],   
                 mode="lines",
                 name="Sauerstoffsättigung",
                 line=dict(color="#4cc9f0", width=2)
@@ -172,12 +181,18 @@ class sleep_data:
     
 
     def calculate_sleep_phases(self):
+
+        """
+        Berechnet einen Schlafscore auf Basis von Schlafdauer,
+        Schlafphasen, Sauerstoffsättigung und Bewegung und erkennt
+        mögliche Hinweise auf Schlafapnoe.
+        """
+
         if self.data["heart_rate_filtered"] is None:
             self.filter_data()
 
         df = self.data.copy()
 
-        # Grenzwerte dynamisch aus den eigenen Daten berechnen
         hr_low = df["heart_rate_filtered"].quantile(0.30)
         hr_high = df["heart_rate_filtered"].quantile(0.70)
 
@@ -219,6 +234,13 @@ class sleep_data:
         return df
     
     def calculate_sleep_score(self):
+
+        """
+        Berechnet einen Schlafscore auf Basis von Schlafdauer,
+        Schlafphasen, Sauerstoffsättigung und Bewegung und erkennt
+        mögliche Hinweise auf Schlafapnoe.
+        """
+
         df = self.data.copy()
 
         df["timestamp"] = pd.to_datetime(df["timestamp"])
