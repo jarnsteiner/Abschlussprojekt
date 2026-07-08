@@ -4,7 +4,7 @@
 
 ## Projektbeschreibung
 
-Diese Anwendung wurde im Rahmen eines HTL-Abschlussprojekts entwickelt und dient zur Analyse von EKG- und Smartwatch-Daten.
+Diese Anwendung wurde im Rahmen eines Abschlussprojekts entwickelt und dient zur Analyse von EKG- und Smartwatch-Daten.
 
 Benutzer können sich registrieren und anmelden. Jeder Benutzer verwaltet ausschließlich seine eigenen Messdaten. Die Anwendung bietet verschiedene Analyse- und Visualisierungsmöglichkeiten für EKG- sowie Schlafdaten.
 
