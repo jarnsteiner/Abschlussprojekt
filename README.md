@@ -93,7 +93,7 @@ Diese Bibliotheken werden automatisch über die Datei `pyproject.toml` installie
 ### Repository klonen
 
 ```bash
-git clone https://github.com/jarnsteiner/Abschlussprojekt.git
+git clone https://github.com/LaurenceBichlbauer04/Abschlussprojekt
 ```
 
 ### In das Projekt wechseln
