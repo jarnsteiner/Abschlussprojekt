@@ -137,7 +137,7 @@ Beim ersten Start können neue Benutzer registriert werden.
 
 Bestehende Benutzer können sich mit ihrem Benutzernamen und Passwort anmelden.
 
-Für diese drei Benutzer sind jeweils als Benutzernamen deren Vorname und als Passwort 1234 zu verwenden.
+Für diese drei Benutzer sind jeweils als Benutzernamen deren Vorname (alles klein geschrieben) und als Passwort 1234 zu verwenden.
 
 Alle hochgeladenen Bilder und EKG-Dateien werden automatisch im Projekt gespeichert.
 
