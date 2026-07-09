@@ -115,11 +115,16 @@ oder alternativ mit pip:
 ```bash
 pip install -r requirements.txt
 ```
+### Virtuelle Umgebung aktivieren
+
+```bash
+.\.venv\Scripts\activate
+```
 
 ### Anwendung starten
 
 ```bash
-streamlit run app.py
+streamlit run main.py
 ```
 
 Danach öffnet sich die Anwendung automatisch im Browser.
